@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration
+  PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+	<!-- 别名设置，不设置时引用要使用全包名，设置后可以使用自定义别名，更加简洁 -->
+	<typeAliases>
+		<!-- 别名设置有两种，一种是一个一个设置，另外一种是设置某个包，默认别名为类名（大小写都可以，建议小写） -->
+		<!-- 第一种设置 
+	 	<typeAlias type="com.mybatis_demo.domain.User" alias="user"/>-->
+	 	<!-- 第二种设置，整个包下面的类都进行别名设置，推荐第二种 -->
+	 	<package name="com.blog.domain"/>
+	 </typeAliases>
+	 <!-- 引入映射文件 -->
+  	<mappers>
+  		<!-- <mapper resource="mapper/UserMapper.xml"/> -->
+  		<package name="com.blog.mapper"/>
+  	</mappers>
+</configuration>

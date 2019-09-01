@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	
+	xsi:schemaLocation="
+	http://www.springframework.org/schema/beans 
+	http://www.springframework.org/schema/beans/spring-beans.xsd
+	http://www.springframework.org/schema/context 
+	http://www.springframework.org/schema/context/spring-context.xsd
+	http://www.springframework.org/schema/tx 
+	http://www.springframework.org/schema/tx/spring-tx.xsd
+	http://www.springframework.org/schema/aop 
+	http://www.springframework.org/schema/aop/spring-aop.xsd">
+	
+	<!-- 读取配置文件 -->
+	<context:property-placeholder location="classpath:db.properties"/>
+	<!-- dataSource -->
+	<bean name="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource">
+		<property name="driverClass" value="${dataSource.driverClass}"/>
+		<property name="jdbcUrl" 	 value="${dataSource.jdbcUrl}"/>
+		<property name="user" 		 value="${dataSource.user}"/>
+		<property name="password" 	 value="${dataSource.password}"/>
+	</bean>
+	<!-- spring整合mybatis -->
+	<!-- 1.配置SqlSessionFactoryBean -->
+	<bean id="sqlSessionFactoryBean" class="org.mybatis.spring.SqlSessionFactoryBean">
+		<!-- 注入数据源 -->
+		<property name="dataSource" ref="dataSource"/>
+		<!-- 告诉spring去哪里加载mybatis配置文件 -->
+		<property name="configLocation"  value="classpath:mybatisConfig.xml"/>
+	</bean>
+	<!-- UserDao -->
+	<!-- <bean name="userDao" class="com.spring_mybatis_demo.dao.UserDaoImpl">
+		<property name="sqlSessionFactory" ref="sqlSessionFactoryBean"/>
+	</bean> -->
+	<!-- mapper动态代理开发
+	<bean id="userMapper" class="org.mybatis.spring.mapper.MapperFactoryBean">
+		注入SqlSessionFactory
+		<property name="sqlSessionFactory" ref="sqlSessionFactoryBean"/>
+		配置接口
+		<property name="mapperInterface" value="com.spring_mybatis_demo.mapper.UserMapper"/>
+	</bean> -->
+	<!-- mapper扫描开发 -->
+	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+		<property name="basePackage" value="com.blog.mapper"/>
+	</bean>
+	<!-- 开启组件扫描，默认开启注解 -->
+	<context:component-scan base-package="com.blog.*"/>
+</beans>

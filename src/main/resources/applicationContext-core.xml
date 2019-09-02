@@ -49,4 +49,10 @@
 	</bean>
 	<!-- 开启组件扫描，默认开启注解 -->
 	<context:component-scan base-package="com.blog.*"/>
+	<!-- 配置事务核心管理器 -->
+	<bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+		<property name="dataSource" ref="dataSource"/>
+	</bean>
+	<!-- 开启注解事务 -->
+	<tx:annotation-driven/>
 </beans>

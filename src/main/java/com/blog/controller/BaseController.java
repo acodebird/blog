@@ -21,10 +21,10 @@ public class BaseController {
 	public @ResponseBody String getOneById(@RequestParam Integer uid) {
 		BaseBean bean = baseService.getOneById(uid);
 		System.out.println(bean);
-		return "成功访问";
+		return "成功访问";//给前端相应数据“成功访问”
 	}
 	@GetMapping(value="/")
 	public String toNewJsp() {
-		return "new";
+		return "new";//会跳转到/webapp/views/new.jsp,前提是new.jsp存在
 	}
 }

@@ -4,6 +4,8 @@
 	xmlns:context="http://www.springframework.org/schema/context"
 	xmlns:tx="http://www.springframework.org/schema/tx"
 	xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:jee="http://www.springframework.org/schema/jee"
 	
 	xsi:schemaLocation="
 	http://www.springframework.org/schema/beans 
@@ -13,7 +15,11 @@
 	http://www.springframework.org/schema/tx 
 	http://www.springframework.org/schema/tx/spring-tx.xsd
 	http://www.springframework.org/schema/aop 
-	http://www.springframework.org/schema/aop/spring-aop.xsd">
+	http://www.springframework.org/schema/aop/spring-aop.xsd
+	http://www.springframework.org/schema/p 
+	http://www.springframework.org/schema/p/spring-p.xsd
+	http://www.springframework.org/schema/jee 
+	http://www.springframework.org/schema/jee/spring-jee.xsd">
 	
 	<!-- 读取配置文件 -->
 	<context:property-placeholder location="classpath:db.properties"/>
@@ -47,6 +53,39 @@
 	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
 		<property name="basePackage" value="com.blog.mapper"/>
 	</bean>
+	
+	<!-- shiro登录安全验证 -->
+	<!-- 1.自定义realm -->
+	<bean id="myRealm" class="com.blog.realm.MyReaml"></bean>
+	<!-- 配置安全管理器. -->
+	<bean id="securityManager" class="org.apache.shiro.web.mgt.DefaultWebSecurityManager">
+		<property name="realm" ref="myRealm"/>
+	</bean>
+	<!-- 3.配置shrio过滤器 -->
+	<bean id="shiroFilter" class="org.apache.shiro.spring.web.ShiroFilterFactoryBean">
+		<!-- shrio的核心安全接口 -->
+		<property name="securityManager" ref="securityManager"/>
+		<!-- 验证失败的跳转路径 -->
+		<property name="loginUrl" value="/views/admin/login.jsp"/>
+		<!-- 过滤内容 -->
+		<property name="filterChainDefinitions">
+			<value>
+				<!-- 访问登陆页面不过滤 anon-->
+				/views/admin/login=anon
+				<!-- 访问admin下的所有都需要登录 authc-->
+				/views/admin/**.jsp=authc
+			</value>
+		</property>
+	</bean>
+	<!-- 4.保证shrio内部lifecycle函数的bean执行 -->
+	<bean id="lifecycleBeanPostProcessor" class="org.apache.shiro.spring.LifecycleBeanPostProcessor"></bean>
+	<!-- 5.开启shiro注解 -->
+	<bean class="org.springframework.aop.framework.autoproxy.DefaultAdvisorAutoProxyCreator" depends-on="lifecycleBeanPostProcessor"></bean>
+	<!-- 6. 添加验证-->
+	<bean class="org.apache.shiro.spring.security.interceptor.AuthorizationAttributeSourceAdvisor">
+		<property name="securityManager" ref="securityManager"/>
+	</bean>
+	
 	<!-- 开启组件扫描，默认开启注解 -->
 	<context:component-scan base-package="com.blog.*"/>
 	<!-- 配置事务核心管理器 -->

@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.blog.mapper.BlogMapper">
+	<select id="getCount" resultType="Integer">
+		select count(*) from t_blogtype
+	</select>
+	<select id="getPage" parameterType="PageBean" resultType="BlogType">
+		<bind name="start" value="currentPage*pageSize"></bind>
+		select * from t_blogtype limit #{start},#{pageSize}
+	</select>
+	<insert id="add"  parameterType="BlogType">
+		insert into t_blogtype values(null,#{typename},#{orderNo})
+	</insert>
+	<update id="update" parameterType="BlogType">
+		<!-- update t_blogtype set typename=#{typename},orderNo=#{orderNo} -->
+		update t_blogtype
+		<set>
+			<if test="typename!=null">
+				typename=#{typename},
+			</if>
+			<if test="orderNo!=null">
+				orderNo=#{orderNo},
+			</if>
+		</set>
+		where id=#{id}
+	</update>
+	<delete id="delete" parameterType="Integer">
+		delete from t_blogtype where id=#{id} 
+	</delete>
+	<delete id="deleteMore">
+		delete from t_blogtype where id in
+		<foreach collection="list" item="item" open="(" separator="," close=")">
+			#{item}
+		</foreach>
+	</delete>
+</mapper>

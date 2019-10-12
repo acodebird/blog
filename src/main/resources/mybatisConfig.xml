@@ -3,6 +3,8 @@
   PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-config.dtd">
 <configuration>
+<!-- 在控制台中输出sql语句 -->
+	<settings> <setting name="logImpl" value="STDOUT_LOGGING"/> </settings>
 	<!-- 别名设置，不设置时引用要使用全包名，设置后可以使用自定义别名，更加简洁 -->
 	<typeAliases>
 		<!-- 别名设置有两种，一种是一个一个设置，另外一种是设置某个包，默认别名为类名（大小写都可以，建议小写） -->

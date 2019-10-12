@@ -5,6 +5,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -24,6 +26,15 @@ public class BlogTypeController {
 	@Autowired
 	private BlogTypeService blogTypeService;
 	
+	/**
+	 * 获取所有博客类型，写博客、编辑博客、查询时用到
+	 * @return
+	 */
+	@PostMapping(value="/admin/loadType")
+	public @ResponseBody List<BlogType> loadType() {
+		List<BlogType> list = blogTypeService.getAll();
+		return list;
+	}
 	/**
 	 * 批量删除博客类型
 	 * @param id
@@ -49,7 +60,6 @@ public class BlogTypeController {
 	 */
 	@PostMapping(value="/admin/delete")
 	public @ResponseBody String delete(@RequestParam Integer id) {
-		System.out.println(id);
 		Integer row = blogTypeService.delete(id);
 		if(row>0) return "{\"result\":\"success\"}";
 		else return "{\"result\":\"failure\"}";
@@ -60,7 +70,8 @@ public class BlogTypeController {
 	 * @return
 	 */
 	@PostMapping(value="/admin/update")
-	public @ResponseBody String update(@RequestBody BlogType blogType) {
+	public @ResponseBody String update(@RequestBody BlogType blogType,HttpServletRequest request) {
+		System.out.println(request.getRequestURL());
 		Integer row = blogTypeService.update(blogType);
 		if(row>0) return "{\"result\":\"success\"}";
 		else return "{\"result\":\"failure\"}";

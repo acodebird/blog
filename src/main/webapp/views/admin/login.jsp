@@ -5,7 +5,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>绿色清爽响应式登录页面模板</title>
+    <title>博客后台登录页面</title>
 	<style>
 		* { margin: 0; padding: 0; }
 		html { height: 100%; }
@@ -62,19 +62,27 @@
     <script>
 	    $(function(){
 	    	$("#submit1").click(function(){
-	    		var flag = true;
-	    		$(".tip").css("display","none");
-	        	if($("#username").val()==null || $("#username").val()==""){
-	        		$('#usernameSpan').show();
-	        		flag = false;
-	        	}
-	        	if($("#password").val()==null || $("#password").val()==""){
-	        		$('#passwordSpan').show();
-	        		flag = false;
-	        	}
-	        	if(flag) $("#myForm").submit();
+	    		check();
+	    	});
+	    	$("body").keyup(function(event) {
+	    		if (event.keyCode == 13) {
+	    			check();
+	    		}
 	    	});
 	    })
+	    function check(){
+	    	var flag = true;
+    		$(".tip").css("display","none");
+        	if($("#username").val()==null || $("#username").val()==""){
+        		$('#usernameSpan').show();
+        		flag = false;
+        	}
+        	if($("#password").val()==null || $("#password").val()==""){
+        		$('#passwordSpan').show();
+        		flag = false;
+        	}
+        	if(flag) $("#myForm").submit();
+	    }
     </script>
 
 </body>

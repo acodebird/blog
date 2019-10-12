@@ -1,0 +1,4 @@
+.w-e-text-container{
+	min-height: 600px !important;/*!important是重点，因为原div是行内样式设置的高度300px*/
+}
+.error { display: none; font-size: 14px; color: #f50; }

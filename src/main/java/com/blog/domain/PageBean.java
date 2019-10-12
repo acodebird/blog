@@ -4,12 +4,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class PageBean <T>{
-	private int pageSize = 8;
-	private int currentPage = 0;
+	private int pageSize = 2;
+	private int currentPage = 1;
 	private int totalPage;
 	private int totalCount;
 	private Integer begin;
 	private Integer end;
+	private BlogDTO blogDTO = new BlogDTO();
 	private List<T> list = new ArrayList<T>();
 	public int getPageSize() {
 		return pageSize;
@@ -46,6 +47,12 @@ public class PageBean <T>{
 	}
 	public void setEnd(Integer end) {
 		this.end = end;
+	}
+	public BlogDTO getBlogDTO() {
+		return blogDTO;
+	}
+	public void setBlogDTO(BlogDTO blogDTO) {
+		this.blogDTO = blogDTO;
 	}
 	public List<T> getList() {
 		return list;

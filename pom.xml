@@ -193,17 +193,20 @@
 	    <version>${mysql.version}</version>
 	</dependency>
 	<!--jsp、jstl、servlet支持， provide属性表示只参与测试，不加载导war包中 -->
+	<!-- jsp -->
 		<dependency>
 			<groupId>javax.servlet.jsp</groupId>
 			<artifactId>javax.servlet.jsp-api</artifactId>
 			<version>${javax.servlet.jsp-api.version}</version>
 			<scope>provided</scope>
 		</dependency>
+		<!-- jstl -->
 		<dependency>
 	    <groupId>javax.servlet</groupId>
 	    <artifactId>jstl</artifactId>
 	    <version>${jstl.version}</version>
 	</dependency>
+		<!-- servlet -->
 		<dependency>
 			<groupId>javax.servlet</groupId>
 			<artifactId>javax.servlet-api</artifactId>

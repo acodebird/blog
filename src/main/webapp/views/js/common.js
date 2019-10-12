@@ -10,8 +10,8 @@ $(document).ready(function () {
     /*通过地址栏url激活菜单状态*/
     $(".w_menu li a").each(function () {
         if (String(window.location).startWith($($(this))[0].href)) {
-            $(this).removeAttr("data-hover");
-            $(this).parent().addClass('active').siblings().removeClass("active");
+            //$(this).removeAttr("data-hover");
+            //$(this).parent().addClass('active').siblings().removeClass("active");
         }
     });
 })

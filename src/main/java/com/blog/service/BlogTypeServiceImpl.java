@@ -53,5 +53,20 @@ public class BlogTypeServiceImpl implements BlogTypeService {
 	public Integer deleteMore(List<Integer> ids) {
 		return blogTypeMapper.deleteMore(ids);
 	}
+	//根据id获取博客类型
+	@Override
+	public BlogType getOneById(Integer id) {
+		return blogTypeMapper.getOneById(id);
+	}
+	//获取所有博客类型，用于写博客选择
+	@Override
+	public List<BlogType> getAll() {
+		return blogTypeMapper.getAll();
+	}
+	//获取第一个博客类型，用于前端文章默认显示类型
+	@Override
+	public Integer getFirstBlogType() {
+		return blogTypeMapper.getFirstBlogType();
+	}
 
 }

@@ -31,17 +31,17 @@
     <div class="navbar navbar-fixed-top">
         <div class="container cl">
             <a class="navbar-logo hidden-xs" href="${pageContext.servletContext.contextPath }/views/index.jsp">
-                <img class="logo" src="${pageContext.servletContext.contextPath }/views/img/logo.png" alt="Lao王博客" />
+                <img class="logo" style="margin-right: 0px;height: 50px" width="150px" src="${pageContext.servletContext.contextPath }/views/img/logo.png" alt="程序鸟" />
             </a>
-            <a class="logo navbar-logo-m visible-xs" href="${pageContext.servletContext.contextPath }/views/index.jsp">Lao王博客</a>
-            <a aria-hidden="false" class="nav-toggle Hui-iconfont visible-xs" href="javascript:void(0);" onclick="showSide();">&#xe667;</a>
+<%--             <a class="logo navbar-logo-m visible-xs" href="${pageContext.servletContext.contextPath }/views/index.jsp">Lao王博客</a>
+            <a aria-hidden="false" class="nav-toggle Hui-iconfont visible-xs" href="javascript:void(0);" onclick="showSide();">&#xe667;</a> --%>
             <nav class="nav navbar-nav nav-collapse w_menu" role="navigation">
                 <ul class="cl">
-                    <li class="active"> <a href="${pageContext.servletContext.contextPath }/views/index.jsp" data-hover="首页">首页</a> </li>
-                    <li> <a href="${pageContext.servletContext.contextPath }/views/about.jsp" data-hover="关于我">关于我</a> </li>
-                    <li> <a href="${pageContext.servletContext.contextPath }/views/mood.jsp" data-hover="碎言碎语">碎言碎语</a> </li>
-                    <li><a href="${pageContext.servletContext.contextPath }/views/article.jsp" data-hover="学无止尽">学无止尽</a></li>
-                    <li> <a href="${pageContext.servletContext.contextPath }/views/board.jsp" data-hover="留言板">留言板</a> </li>
+                    <li> <a href="${pageContext.servletContext.contextPath }" data-hover="首页">首页</a> </li>
+                    <li><a href="${pageContext.servletContext.contextPath }/views/article.jsp" data-hover="文章">文章</a></li>
+                    <li> <a href="#" title="即将上线" data-hover="资源分享">资源分享</a> </li>
+                    <li class="active"> <a href="${pageContext.servletContext.contextPath }/views/about.jsp" data-hover="关于我">关于我</a> </li>
+                	<li> <a href="${pageContext.servletContext.contextPath }/views/mood.jsp" data-hover="公告">公告</a> </li>
                 </ul>
             </nav>
             <nav class="navbar-nav navbar-userbar hidden-xs hidden-sm " style="top: 0;">
@@ -90,8 +90,11 @@
 </section>
 <footer class="footer mt-20">
     <div class="container-fluid" id="foot">
-        <p>Copyright &copy; 2016-2017 www.wfyvv.com <br>
-            <a href="#" target="_blank">皖ICP备17002922号</a>  更多模板：<a href="http://www.mycodes.net/" target="_blank">源码之家</a><br>
+        <p>Copyright &copy; 2018-2019 www.acodebird.cn <br>
+	        <span id="busuanzi_container_site_pv">本站总访问量
+	        	<span id="busuanzi_value_site_pv"></span>次
+	        </span>
+	        <a href="http://www.beian.miit.gov.cn" target="_blank">粤ICP备19103774号</a> <br>
         </p>
     </div>
 </footer>
@@ -101,5 +104,6 @@
 <script type="text/javascript" src="${pageContext.servletContext.contextPath }/views/plugin/pifu/pifu.js"></script>
 <script type="text/javascript" src="${pageContext.servletContext.contextPath }/views/js/common.js"></script>
 <script> $(function(){ $(window).on("scroll",backToTopFun); backToTopFun(); }); </script>
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
 </body>
 </html>

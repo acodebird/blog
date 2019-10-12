@@ -35,4 +35,13 @@
 			#{item}
 		</foreach>
 	</delete>
+	<select id="getOneById" parameterType="Integer" resultType="BlogType">
+		select * from t_blogtype where id = #{id}
+	</select>
+	<select id="getAll" resultType="BlogType">
+		select * from t_blogtype
+	</select>
+	<select id="getFirstBlogType" resultType="Integer">
+		select * from t_blogtype  limit 1
+	</select>
 </mapper>

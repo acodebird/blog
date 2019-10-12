@@ -132,13 +132,16 @@
 					<li class=''><a href='${pageContext.request.contextPath }/views/admin/blogTypeList.jsp'> <i
 							class='icon-user'></i> <span>博客类型管理</span>
 					</a></li>
-					<li class=''><a href='${pageContext.request.contextPath }/views/showRooms.jsp'> <i
+					<li class=''><a href='${pageContext.request.contextPath }/views/admin/writeBlog.jsp'> <i
 							class='icon-home'></i> <span>写博客</span>
 					</a></li>
-					<li class=''><a href='#'> <i
+					<li class=''><a href='${pageContext.request.contextPath }/admin/showBlogs'> <i
 							class='icon-desktop'></i> <span>博客管理</span>
+					</a></li>
+					<li class=''><a href='${pageContext.request.contextPath }/admin/showBlogs?state=0'> <i
+							class='icon-home'></i> <span>我的草稿</span>
 					</a></li>	
-					<li class=''><a href='${pageContext.request.contextPath }/views/admin/listOrder.jsp'> <i
+					<li class=''><a href='${pageContext.request.contextPath }/views/admin/commentList.jsp'> <i
 							class='icon-tasks'></i> <span>评论管理</span>
 					</a></li>
 					<li class=''><a href='${pageContext.request.contextPath }/views/index.jsp'> <i

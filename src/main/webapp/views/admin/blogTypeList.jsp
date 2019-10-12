@@ -14,8 +14,6 @@
     <link type="text/css" rel="stylesheet" href="${pageContext.request.contextPath}/views/plugins/font-awesome/css/font-awesome.css">
     <link type="text/css" rel="stylesheet" href="${pageContext.request.contextPath}/views/admin/css/jquery.dataTables.css">
     <link type="text/css" rel="stylesheet" href="${pageContext.request.contextPath}/views/admin/css/buttons.dataTables.min.css">
-    <link type="text/css" rel="stylesheet" href="${pageContext.request.contextPath}/views/admin/css/editor.dataTables.min.css">
-    <link type="text/css" rel="stylesheet" href="${pageContext.request.contextPath}/views/admin/css/showAdmins.css">
     
     <!--[if lt IE 9]>
     <script src='${pageContext.request.contextPath }/views/assets/javascripts/html5shiv.js' type='text/javascript'></script>
@@ -96,6 +94,12 @@
 	<link href='${pageContext.request.contextPath }/views/assets/stylesheets/demo.css' media='all' rel='stylesheet'
 		type='text/css' />
 	
+	<style type="text/css">
+		.right{
+			float:right;
+			margin-top: 15px;		
+		}
+	</style>
     
 </head>
 <body class='contrast-blue '>
@@ -132,13 +136,16 @@
 					<li class='active'><a href='${pageContext.request.contextPath }/views/admin/blogTypeList.jsp'> <i
 							class='icon-user'></i> <span>博客类型管理</span>
 					</a></li>
-					<li class=''><a href='${pageContext.request.contextPath }/views/showRooms.jsp'> <i
+					<li class=''><a href='${pageContext.request.contextPath }/views/admin/writeBlog.jsp'> <i
 							class='icon-home'></i> <span>写博客</span>
 					</a></li>
-					<li class=''><a href='#'> <i
+					<li class=''><a href='${pageContext.request.contextPath }/admin/showBlogs'> <i
 							class='icon-desktop'></i> <span>博客管理</span>
 					</a></li>	
-					<li class=''><a href='${pageContext.request.contextPath }/views/admin/listOrder.jsp'> <i
+					<li class=''><a href='${pageContext.request.contextPath }/admin/showBlogs?state=0'> <i
+							class='icon-home'></i> <span>我的草稿</span>
+					</a></li>
+					<li class=''><a href='${pageContext.request.contextPath }/views/admin/commentList.jsp'> <i
 							class='icon-tasks'></i> <span>评论管理</span>
 					</a></li>
 					<li class=''><a href='${pageContext.request.contextPath }/views/index.jsp'> <i
@@ -466,7 +473,6 @@
 	<script type="text/javascript" src="${pageContext.request.contextPath}/views/admin/js/jquery.dataTables.js"></script>
 	<script type="text/javascript" src="${pageContext.request.contextPath}/views/admin/js/bootstrap.min.js"></script>
 	<script type="text/javascript" src="${pageContext.request.contextPath}/views/admin/js/dataTables.buttons.min.js"></script>
-	<script type="text/javascript" src="${pageContext.request.contextPath}/views/admin/js/dataTables.editor.min.js"></script>
 	<script type='text/javascript' src='${pageContext.request.contextPath}/views/admin/js/blogTypeList.js'></script>
 	
 	

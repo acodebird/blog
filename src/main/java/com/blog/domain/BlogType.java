@@ -27,5 +27,9 @@ public class BlogType {
 	public void setOrderNo(Integer orderNo) {
 		this.orderNo = orderNo;
 	}
+	@Override
+	public String toString() {
+		return "BlogType [id=" + id + ", typename=" + typename + ", orderNo=" + orderNo + "]";
+	}
 	
 }

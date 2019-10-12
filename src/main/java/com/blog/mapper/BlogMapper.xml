@@ -3,36 +3,119 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.blog.mapper.BlogMapper">
-	<select id="getCount" resultType="Integer">
-		select count(*) from t_blogtype
-	</select>
-	<select id="getPage" parameterType="PageBean" resultType="BlogType">
-		<bind name="start" value="currentPage*pageSize"></bind>
-		select * from t_blogtype limit #{start},#{pageSize}
-	</select>
-	<insert id="add"  parameterType="BlogType">
-		insert into t_blogtype values(null,#{typename},#{orderNo})
+	<insert id="insert" parameterType="Blog">
+		insert into t_blog values(null,#{title},#{summary},#{releaseDate},#{clickHit},#{replyHit},#{content},#{blogType.id},#{keyWord},#{state})
 	</insert>
-	<update id="update" parameterType="BlogType">
-		<!-- update t_blogtype set typename=#{typename},orderNo=#{orderNo} -->
-		update t_blogtype
-		<set>
-			<if test="typename!=null">
-				typename=#{typename},
+	<select id="getPublishYear" parameterType="Integer" resultType="String">
+		select DISTINCT YEAR(releaseDate) from t_blog where state=#{state} and releaseDate is not null ORDER BY releaseDate asc
+	</select>
+	<select id="getCount" parameterType="blogDTO" resultType="Integer">
+		<!-- select count(*) from t_blog where state = 1 -->
+		select count(*) from t_blog
+		<where>
+			<if test="state!=null">
+				and state=#{state}
 			</if>
-			<if test="orderNo!=null">
-				orderNo=#{orderNo},
+			<if test="publishYear!=null and publishYear!=''">
+				and year(releaseDate)=#{publishYear}
+			</if>
+			<if test="typeId!=null">
+				and typeId=#{typeId}
+			</if>
+			<if test="keyWord!=null and keyWord!=''">
+				and (title like concat('%',#{keyWord},'%') 
+				or content like concat('%',#{keyWord},'%')
+				or keyWord like concat('%',#{keyWord},'%'))
+			</if>
+		</where>
+	</select>
+	<resultMap type="Blog" id="BlogMap">
+		<id property="id" column="id"/>
+		<result property="title" column="title"/>
+		<result property="releaseDate" column="releaseDate"/>
+		<result property="content" column="content"/>
+		<result property="keyWord" column="keyWord"/>
+		<result property="summary" column="summary"/>
+		<result property="clickHit" column="clickHit"/>
+		<result property="replyHit" column="replyHit"/>
+		<association property="blogType" javaType="BlogType">
+			<id property="id" column="typeId"/>
+			<result property="typename" column="typename"/>
+		 </association>
+	</resultMap>
+	<select id="getPage" parameterType="PageBean" resultMap="BlogMap">
+		<bind name="start" value="(currentPage-1)*pageSize"></bind>
+		<!-- select * from t_blog a,t_blogtype b where a.state = 1 -->
+		select * from t_blog a,t_blogtype b  
+		<where>
+			and a.typeId = b.id
+			<if test="blogDTO.state!=null">
+				and state=#{blogDTO.state}
+			</if>
+			<if test="blogDTO.publishYear!=null and blogDTO.publishYear!=''">
+				and year(releaseDate)=#{blogDTO.publishYear}
+			</if>
+			<if test="blogDTO.typeId!=null">
+				and typeId=#{blogDTO.typeId}
+			</if>
+			<if test="blogDTO.keyWord!=null and blogDTO.keyWord!=''">
+				and (title like concat('%',#{blogDTO.keyWord},'%') 
+				or content like concat('%',#{blogDTO.keyWord},'%')
+				or keyWord like concat('%',#{blogDTO.keyWord},'%'))
+			</if>
+		</where>
+		order by releaseDate desc  limit #{start},#{pageSize}
+	</select>
+	<select id="getBlogById" parameterType="Integer" resultMap="BlogMap">
+		select * from t_blog a,t_blogtype b where a.id=#{id} and a.typeId = b.id
+	</select>
+	<update id="updateBlog" parameterType="Blog">
+		update t_blog 
+		<set>
+			<if test="title!=null">
+				title = #{title},
+			</if>
+			<if test="content!=null">
+				content = #{content},
+			</if>
+			<if test="summary!=null">
+				summary = #{summary},
+			</if>
+			<if test="blogType.id!=null">
+				typeId = #{blogType.id},
+			</if>
+			<if test="keyWord!=null">
+				keyWord = #{keyWord},
+			</if>
+			<if test="state!=null">
+				state = #{state},
 			</if>
 		</set>
-		where id=#{id}
+		where id = #{id}
 	</update>
-	<delete id="delete" parameterType="Integer">
-		delete from t_blogtype where id=#{id} 
-	</delete>
-	<delete id="deleteMore">
-		delete from t_blogtype where id in
-		<foreach collection="list" item="item" open="(" separator="," close=")">
-			#{item}
-		</foreach>
-	</delete>
+	<update id="deleteBlog" parameterType="Integer">
+		update t_blog set state=-1,clickHit=0,replyHit=0 where id=#{id}
+	</update>
+	
+	<select id="getLastBlog" parameterType="Integer" resultMap="BlogMap">
+		select * from t_blog where id&gt;#{id} and state=1 order by releaseDate asc limit 1
+	</select>
+	<select id="getNextBlog" parameterType="Integer" resultMap="BlogMap">
+		select * from t_blog where id&lt;#{id} and state=1 order by releaseDate desc limit 1
+	</select>
+	<update id="addClickHit" parameterType="Integer">
+		update t_blog set clickHit = clickHit+1 where id=#{id}
+	</update>
+	<update id="addReplyHit" parameterType="Integer">
+		update t_blog set replyHit = replyHit+1 where id=#{id}
+	</update>
+	<update id="reduceReplyHit" parameterType="Integer">
+		update t_blog set replyHit = replyHit-1 where id=(select blogId from t_comment where id=#{id})
+	</update>
+	<select id="loadHottestArticles" resultMap="BlogMap">
+		select * from t_blog where state=1 order by clickHit desc limit 5
+	</select>
+	<select id="loadLatestArticles" resultMap="BlogMap">
+		select * from t_blog where state=1 order by releaseDate desc limit 5
+	</select>
 </mapper>

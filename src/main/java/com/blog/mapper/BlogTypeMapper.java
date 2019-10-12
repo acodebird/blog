@@ -18,4 +18,10 @@ public interface BlogTypeMapper {
 	public Integer delete(Integer id);
 	//批量删除博客类型
 	public Integer deleteMore(List<Integer> ids);
+	//根据id获取博客类型
+	public BlogType getOneById(Integer id);
+	//获取所有博客类型，用于写博客选择
+	public List<BlogType> getAll();
+	//获取第一个博客类型，用于前端文章默认显示类型
+	public Integer getFirstBlogType();
 }

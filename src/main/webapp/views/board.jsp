@@ -37,11 +37,11 @@
             <a aria-hidden="false" class="nav-toggle Hui-iconfont visible-xs" href="javascript:void(0);" onclick="showSide();">&#xe667;</a>
             <nav class="nav navbar-nav nav-collapse w_menu" role="navigation">
                 <ul class="cl">
-                    <li class="active"> <a href="${pageContext.servletContext.contextPath }/views/index.jsp" data-hover="首页">首页</a> </li>
+                    <li > <a href="${pageContext.servletContext.contextPath }/views/index.jsp" data-hover="首页">首页</a> </li>
                     <li> <a href="${pageContext.servletContext.contextPath }/views/about.jsp" data-hover="关于我">关于我</a> </li>
-                    <li> <a href="${pageContext.servletContext.contextPath }/views/mood.jsp" data-hover="碎言碎语">碎言碎语</a> </li>
+                    <li > <a href="${pageContext.servletContext.contextPath }/views/mood.jsp" data-hover="碎言碎语">碎言碎语</a> </li>
                     <li><a href="${pageContext.servletContext.contextPath }/views/article.jsp" data-hover="学无止尽">学无止尽</a></li>
-                    <li> <a href="${pageContext.servletContext.contextPath }/views/board.jsp" data-hover="留言板">留言板</a> </li>
+                    <li class="active"> <a href="${pageContext.servletContext.contextPath }/views/board.jsp" data-hover="留言板">留言板</a> </li>
                 </ul>
             </nav>
             <nav class="navbar-nav navbar-userbar hidden-xs hidden-sm " style="top: 0;">

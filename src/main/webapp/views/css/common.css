@@ -4,6 +4,17 @@ body {
 a:hover{
 	text-decoration: none;
 }
+/* 博客详情上一篇和下一篇的a标签设置最大显示字数，超出隐藏 */
+.nextinfo a{
+	overflow: hidden;
+	word-break:keep-all;
+	white-space:nowrap;
+	text-overflow:ellipsis;
+	max-width:300px;
+	display: inline-block;
+	position: relative;
+	top: 10px;
+}
 .container:after { /*优化container高度*/
 	content:""; 
 	display: block; 
@@ -204,7 +215,6 @@ a:hover{
     white-space: nowrap;
     overflow: hidden;
     list-style: decimal-leading-zero inside;
-    font-style: oblique;
     font-size: 14px;
 }
 .index_recd li.index_recd_item {
@@ -286,7 +296,7 @@ a.blog_link{ color:#1CA368;}
     border: #ccc 1px dashed;
     text-align: center;
     padding: 5px 0;
-    margin-right: 30px;
+    margin-right: 0px;
     color: #999;
 }
 .box_c span {
@@ -312,14 +322,14 @@ ul.infos p {
 }
 
 .keybq {
-    background: url(../img/tab.png) no-repeat 10px center #F8F8F8;
+    /* background: url(../img/tab.png) no-repeat 10px center #F8F8F8; */
     line-height: 30px;
     height: 30px;
-    padding-left: 40px;
+    padding-left: 10px;
     border: 1px solid #F0F0F0;
 }
-.keybq span {
-    color: #099;
+.keybq {
+    color: gray;
 }
 .keybq .label{
 	margin-right: 10px;

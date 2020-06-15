@@ -27,7 +27,7 @@
   		<shiro.version>1.2.4</shiro.version>
   		<lucene.version>5.3.1</lucene.version>
   		<commons-logging.version>1.1.1</commons-logging.version>
-  		<commons-collections.version>3.2.1</commons-collections.version>
+  		<commons-collections.version>3.2.2</commons-collections.version>
   		<commons-beanutils.version>1.8.0</commons-beanutils.version>
   		<commons-lang.version>2.5</commons-lang.version>
   		<commons-codec.version>1.10</commons-codec.version>
